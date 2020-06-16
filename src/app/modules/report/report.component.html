@@ -34,3 +34,9 @@
     </table>
   </div>
 </div>
+
+<div class="row" *ngIf="showChart">
+  <div class="col-12 d-flex justify-content-center">
+    <echarts [initOpts]="initOpts" [options]="options"></echarts>
+  </div>
+</div>

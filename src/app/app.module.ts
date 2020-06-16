@@ -18,7 +18,9 @@ import {AuthService} from "./modules/auth/auth.service";
 import {HttpResponseHandlerService} from "./shared/services/http-response-handler.service";
 import {ToastService} from "./shared/services/toast.service";
 import {AdminLayoutComponent} from "./core/layouts/admin-layout/admin-layout.component";
-import { ReportComponent } from './modules/report/report.component';
+import {ReportComponent} from './modules/report/report.component';
+import {NgxEchartsModule} from "ngx-echarts";
+import * as echarts from 'echarts';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,9 @@ import { ReportComponent } from './modules/report/report.component';
     ToastNoAnimationModule.forRoot({
       timeOut: 4000,
       closeButton: true
+    }),
+    NgxEchartsModule.forRoot({
+      echarts,
     }),
   ],
   providers: [

@@ -1,0 +1,26 @@
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+  <h5 class="my-0 mr-md-auto font-weight-normal">Barcamp</h5>
+  <nav class="my-2 my-md-0 mr-md-3">
+    <a class="p-2 text-dark" routerLink="/dashboard">Inicio</a>
+    <a class="p-2 text-dark" routerLink="/survey">Encuesta</a>
+    <a class="p-2 text-dark" routerLink="/report">Reportes</a>
+  </nav>
+  <a class="btn btn-outline-secondary" href="javascript:void(0)" (click)="authService.logout()">Salir</a>
+</div>
+
+<div class="container">
+
+  <div class="mb-3">
+    <router-outlet></router-outlet>
+  </div>
+
+  <footer class="pt-4 my-md-5 pt-md-5 border-top">
+    <div class="row">
+      <div class="col-12 col-md">
+        <img class="mb-2" src="assets/logo.png" alt="" width="24" height="24">
+        <small class="d-block mb-3 text-muted">Robert Gomez &copy; 2020<br />Programación Web Avanzada</small>
+      </div>
+    </div>
+  </footer>
+
+</div>

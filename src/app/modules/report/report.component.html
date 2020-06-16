@@ -1,0 +1,36 @@
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">Reportes</h1>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Pregunta</th>
+        <th scope="col" class="text-center">1</th>
+        <th scope="col" class="text-center">2</th>
+        <th scope="col" class="text-center">3</th>
+        <th scope="col" class="text-center">4</th>
+        <th scope="col" class="text-center">5</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let q of surveyList; index as i">
+        <ng-container *ngIf="(i + 1) !== 4">
+          <th scope="row">{{q.question}}</th>
+          <td class="text-center">{{q.ratingOne}}</td>
+          <td class="text-center">{{q.ratingTwo}}</td>
+          <td class="text-center">{{q.ratingThree}}</td>
+          <td class="text-center">{{q.ratingFour}}</td>
+          <td class="text-center">{{q.ratingFive}}</td>
+        </ng-container>
+        <ng-container *ngIf="(i + 1) === 4">
+          <th scope="row">{{q.question}}</th>
+          <td class="text-center" colspan="5">{{q.comments}} {{q.comments === 1 ? 'comentario' : 'comentarios'}}</td>
+        </ng-container>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="text-center">
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-signin" autocomplete="off">
+
+    <img class="mb-4" src="assets/logo.png" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Crear una cuenta</h1>
+
+    <label for="inputEmail" class="sr-only">Usuario</label>
+    <input formControlName="username"
+           type="text"
+           id="inputEmail"
+           class="form-control"
+           placeholder="Usuario"
+           required
+           autofocus>
+
+    <label for="inputPassword" class="sr-only">Contraseña</label>
+    <input formControlName="password"
+           type="password"
+           id="inputPassword"
+           class="form-control"
+           placeholder="Contraseña"
+           required>
+
+    <div class="row">
+      <div class="col">
+        <div class="float-right">
+          <button class="btn btn-link" routerLink="/auth/login">Iniciar sesión</button>
+        </div>
+      </div>
+    </div>
+
+    <button [disabled]="!form.valid" class="btn btn-lg btn-primary btn-block" type="submit">
+      Crear cuenta
+    </button>
+
+    <p class="mt-3 mb-3 text-muted">Robert Gomez &copy; 2020<br/>Programación Web Avanzada</p>
+
+  </form>
+
+</div>

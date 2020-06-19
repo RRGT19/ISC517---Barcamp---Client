@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {CONSTANTS} from "../../shared/utilities/Constants";
 import {IResponse, IUser} from "./auth.models";
+import {map} from "rxjs/operators";
 
 /**
  * The authentication service is used to login and logout of the application.
@@ -34,16 +35,18 @@ export class AuthService {
    * are added to local storage.
    */
   login(username: string, password: string): Observable<any> {
-    const user: IUser = {
+    // Just for testing
+    /*const user: IUser = {
       id: 1,
-      username: 'robert',
+      username: 'admin',
       password: '123456',
+      accountType: 'OWNER',
     };
     user.token = `${btoa(`${username}:${password}`)}`;
     this.storage.setItem('currentUser', JSON.stringify(user));
-    return of(user);
-    /*return this.http.post<any>(
-      CONSTANTS.API_URL + 'users/login',
+    return of(user);*/
+    return this.http.post<any>(
+      CONSTANTS.API_URL + 'participants/login',
       {username: username, password: password}
     )
       .pipe(
@@ -53,7 +56,14 @@ export class AuthService {
           this.storage.setItem('currentUser', JSON.stringify(user));
           return user;
         })
-      );*/
+      );
+  }
+
+  register(username: string, password: string): Observable<any> {
+    return this.http.post<any>(
+      CONSTANTS.API_URL + 'participants/create',
+      {username: username, password: password}
+    );
   }
 
   logout() {
@@ -69,12 +79,24 @@ export class AuthService {
     return this.http.get<IResponse[]>(CONSTANTS.API_URL + 'responses');
   }
 
+  get isOwner(): boolean {
+    return this.user.accountType === 'OWNER';
+  }
+
+  get hasResponded(): boolean {
+    return this.user.response.length > 0;
+  }
+
   private clearAll() {
     this.storage.clear();
   }
 
-  private get user() {
+  private get user(): IUser {
     return JSON.parse(this.storage.getItem('currentUser'));
+  }
+
+  saveUser(user: IUser) {
+    this.storage.setItem('currentUser', JSON.stringify(user));
   }
 
 }

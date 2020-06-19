@@ -51,7 +51,7 @@ import * as echarts from 'echarts';
     AuthService,
     HttpResponseHandlerService,
     ToastService,
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    /*{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},*/
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ContentTypeInterceptor, multi: true},
   ],

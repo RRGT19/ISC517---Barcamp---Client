@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    this.authService.login(this.f.username.value, this.f.password.value)
+    this.authService.register(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe(res => {
         this.toastService.showSuccess('Cuenta creada');

@@ -1,16 +1,19 @@
 export interface IUser {
   id: number;
   username: string;
-  password: string;
+  password?: string;
+  accountType: string;
   token?: string;
+  response: IResponse[];
 }
 
 export interface IParticipant {
   id: number;
   createdAt: Date;
+  accountType: string;
   username: string;
   token?: string;
-  responseList?: IResponse[];
+  response?: IResponse[];
 }
 
 export interface IResponse {

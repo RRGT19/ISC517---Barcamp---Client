@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../auth/auth.service";
 import {Router} from "@angular/router";
-import {first} from "rxjs/operators";
-import {IParticipant, IResponse} from "../auth/auth.models";
 import {ToastService} from "../../shared/services/toast.service";
 
 @Component({
@@ -16,10 +14,11 @@ export class SurveyComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router,
     private toastService: ToastService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.initForm();
@@ -63,7 +62,8 @@ export class SurveyComponent implements OnInit {
       responseList: this.responseList.value
     };
 
-    this.authService.saveResponse(response).toPromise().then(() => {
+    this.authService.saveResponse(response).toPromise().then(res => {
+      this.authService.saveUser(res);
       this.toastService.showSuccess('Respuesta enviada');
       this.router.navigateByUrl('/');
     });

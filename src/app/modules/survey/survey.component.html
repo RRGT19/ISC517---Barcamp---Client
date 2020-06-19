@@ -1,27 +1,29 @@
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-  <h1 class="display-4">Encuesta</h1>
-  <form [formGroup]="form" autocomplete="off">
-    <p class="lead">¿Las charlas donde usted participó cumplieron con sus expectativas?.</p>
-    <ng-container *ngTemplateOutlet="RANGE; context: {$implicit: responseList.at(0)}"></ng-container>
-    <p class="lead">¿Los expositores mostraron tener dominio del tema?.</p>
-    <ng-container *ngTemplateOutlet="RANGE; context: {$implicit: responseList.at(1)}"></ng-container>
-    <p class="lead">¿Las instalaciones del evento fueron confortables para usted?.</p>
-    <ng-container *ngTemplateOutlet="RANGE; context: {$implicit: responseList.at(2)}"></ng-container>
-    <p class="lead">¿Tiene algún comentario para los organizadores?.</p>
-    <ng-container *ngTemplateOutlet="INPUT; context: {$implicit: responseList.at(3)}"></ng-container>
-  </form>
-</div>
-
-<div class="row justify-content-center">
-  <div class="col-3">
-    <button [disabled]="!form.valid"
-            (click)="onSubmit()"
-            class="btn btn-success btn-block"
-            type="submit">
-      Enviar
-    </button>
+<ng-container *ngIf="!authService.hasResponded; else showMessage">
+  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Encuesta</h1>
+    <form [formGroup]="form" autocomplete="off">
+      <p class="lead">¿Las charlas donde usted participó cumplieron con sus expectativas?.</p>
+      <ng-container *ngTemplateOutlet="RANGE; context: {$implicit: responseList.at(0)}"></ng-container>
+      <p class="lead">¿Los expositores mostraron tener dominio del tema?.</p>
+      <ng-container *ngTemplateOutlet="RANGE; context: {$implicit: responseList.at(1)}"></ng-container>
+      <p class="lead">¿Las instalaciones del evento fueron confortables para usted?.</p>
+      <ng-container *ngTemplateOutlet="RANGE; context: {$implicit: responseList.at(2)}"></ng-container>
+      <p class="lead">¿Tiene algún comentario para los organizadores?.</p>
+      <ng-container *ngTemplateOutlet="INPUT; context: {$implicit: responseList.at(3)}"></ng-container>
+    </form>
   </div>
-</div>
+
+  <div class="row justify-content-center">
+    <div class="col-3">
+      <button [disabled]="!form.valid"
+              (click)="onSubmit()"
+              class="btn btn-success btn-block"
+              type="submit">
+        Enviar
+      </button>
+    </div>
+  </div>
+</ng-container>
 
 <ng-template #RANGE let-responseFormGroup>
   <div [formGroup]="responseFormGroup">
@@ -46,5 +48,11 @@
            formControlName="rating"
            class="form-control"/>
     <small id="textHelp" class="form-text text-muted">Opcional.</small>
+  </div>
+</ng-template>
+
+<ng-template #showMessage>
+  <div class="alert alert-info" role="alert">
+    Ya enviaste tu respuesta anteriormente.
   </div>
 </ng-template>
